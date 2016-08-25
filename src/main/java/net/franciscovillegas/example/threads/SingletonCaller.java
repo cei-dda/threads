@@ -33,6 +33,8 @@ public class SingletonCaller extends Thread {
 		this.singleton = singleton;
 	}
 
+	// NUNCA LLAMAR A ESTE METODO DIRECTAMENTE CUANDO SE QUIERE
+	// TRABAJAR CON HILOS (EXCEPCION: TEST UNITARIOS)
 	@Override
 	public void run() {
 
@@ -45,8 +47,15 @@ public class SingletonCaller extends Thread {
 		}
 
 		this.singleton = Singleton.getInstance();
-
-		LOGGER.debug("{} Have instance of Singleton. \n\t My singleton instance is: {}", new Object[]{threadName, this.singleton});
+		LOGGER.debug("{} Have instance of Singleton. \n\t My singleton instance is: {}",
+				new Object[] { threadName, this.singleton });
+		while(true) {
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

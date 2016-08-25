@@ -11,7 +11,7 @@ public class App {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		System.out.println("----> main");
 		LOGGER.debug("This is the logger");
 		Singleton.bla();
@@ -21,6 +21,9 @@ public class App {
 		
 		sc1.start();
 		sc2.start();
+		while(true) {
+			Thread.sleep(1000L);
+		}
 	}
 
 }
